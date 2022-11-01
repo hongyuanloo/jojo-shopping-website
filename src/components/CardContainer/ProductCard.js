@@ -9,14 +9,47 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function ProductCard(props) {
-  const { title, price, images } = props.product;
+export default function ProductCard({ product, cart, setCart }) {
+  const { title, price, images, category } = product;
 
   const StyledTypography = styled(Typography)(({ theme }) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
     fontSize: theme.typography.caption.fontSize,
   }));
+
+  const addCart = function () {
+    const index = cart.items.findIndex((item) => {
+      return item.title === title;
+    });
+    if (index !== -1) {
+      //update existing item
+      const cartItems = [...cart.items];
+      cartItems[index].quantity++;
+      setCart({
+        ...cart,
+        items: cartItems,
+        totalQuantity: cart.totalQuantity + 1,
+        totalPrice: cart.totalPrice + price,
+      });
+    } else {
+      // add new item
+      const newItem = {
+        title: title,
+        price: price,
+        image: images[0],
+        quantity: 1,
+        category: category.name,
+      };
+      const newCartItems = [...cart.items, newItem];
+      setCart({
+        ...cart,
+        items: newCartItems,
+        totalQuantity: cart.totalQuantity + 1,
+        totalPrice: cart.totalPrice + price,
+      });
+    }
+  };
 
   return (
     <Card sx={{ maxWidth: { xs: 400, md: 287 }, minWidth: { md: 190 } }} p={2}>
@@ -50,8 +83,9 @@ export default function ProductCard(props) {
               opacity: 0.6,
               ":hover": { opacity: 1.0 },
             }}
+            onClick={addCart}
           >
-            <StyledTypography>VIEW OPTIONS</StyledTypography>
+            <StyledTypography>Add to Cart</StyledTypography>
           </Button>
         </Stack>
       </Box>

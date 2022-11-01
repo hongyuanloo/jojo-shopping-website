@@ -1,5 +1,6 @@
 import { Box, Stack, styled, Typography } from "@mui/material";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
+import { Link } from "react-router-dom";
 
 export default function LeftBar() {
   const LeftBar = styled(Box)({
@@ -15,12 +16,14 @@ export default function LeftBar() {
 
   return (
     <LeftBar>
-      <Stack direction="row" alignItems="center" gap="5px" px={3} py={4}>
-        <AcUnitIcon color="primary" fontSize="large" />
-        <Typography variant="h6" color="text.secondary">
-          LOGO
-        </Typography>
-      </Stack>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <Stack direction="row" alignItems="center" gap="5px" px={3} py={4}>
+          <AcUnitIcon color="primary" fontSize="large" />
+          <Typography variant="h6" color="text.secondary">
+            LOGO
+          </Typography>
+        </Stack>
+      </Link>
       <Stack
         direction="row"
         spacing={4}
