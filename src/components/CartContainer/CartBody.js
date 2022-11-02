@@ -5,11 +5,18 @@ import CartItem from "./CartItem";
 import CartSubTotal from "./CartSubTotal";
 
 export default function CartBody() {
-  const { cart } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
 
   function displayCartItems() {
     const cartItemsList = cart.items.map((cartItem) => {
-      return <CartItem key={cartItem.title} cartItem={cartItem} />;
+      return (
+        <CartItem
+          key={cartItem.title}
+          cartItem={cartItem}
+          setCart={setCart}
+          cart={cart}
+        />
+      );
     });
     return cartItemsList;
   }
