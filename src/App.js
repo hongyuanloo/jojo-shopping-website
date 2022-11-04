@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState, createContext } from "react";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
+import Login from "./pages/Login";
+import CreateAccount from "./pages/CreateAccount";
 
 export const CartContext = createContext();
 // router ref: https://www.w3schools.com/react/react_router.asp
@@ -15,8 +17,12 @@ function App() {
     <Router>
       <CartContext.Provider value={{ cart, setCart }}>
         <Routes>
-          <Route path="/" element={<Products />}></Route>
-          <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/">
+            <Route index element={<Products />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="login" element={<Login />} />
+            <Route path="createAccount" element={<CreateAccount />} />
+          </Route>
         </Routes>
       </CartContext.Provider>
     </Router>
