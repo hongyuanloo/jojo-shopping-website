@@ -1,15 +1,15 @@
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+import { AuthContext } from "../../context/AuthContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 import { Box, styled, Button, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { CartContext } from "../../App";
-import { AuthContext } from "../../context/AuthContext";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase";
 
 export default function RightBar() {
   const { cart, setCart } = useContext(CartContext);

@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import { Box, Stack, styled, Typography } from "@mui/material";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
-import { Link } from "react-router-dom";
 
 export default function LeftBar() {
   const LeftBar = styled(Box)({
@@ -29,7 +29,9 @@ export default function LeftBar() {
         spacing={4}
         sx={{ display: { xs: "none", md: "flex" } }}
       >
-        <StyleTypography>Home</StyleTypography>
+        <Link to="/home" style={{ textDecoration: "none" }}>
+          <StyleTypography>Home</StyleTypography>
+        </Link>
         <Link to="/shop" style={{ textDecoration: "none" }}>
           <StyleTypography>Shop</StyleTypography>
         </Link>

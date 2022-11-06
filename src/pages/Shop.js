@@ -1,6 +1,6 @@
 import ShopContainer from "../components/ShopContainer";
-import { Box } from "@mui/material";
 import NavigationBar from "../components/NavigationBar";
+import { Box } from "@mui/material";
 
 export default function Shop() {
   return (

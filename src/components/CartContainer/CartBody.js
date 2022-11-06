@@ -1,9 +1,9 @@
-import { List, Divider, Button, Box } from "@mui/material";
 import { useContext } from "react";
-import { CartContext } from "../../App";
+import { CartContext } from "../../context/CartContext";
+import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 import CartSubTotal from "./CartSubTotal";
-import { Link } from "react-router-dom";
+import { List, Divider, Button, Box } from "@mui/material";
 
 export default function CartBody() {
   const { cart, setCart } = useContext(CartContext);
