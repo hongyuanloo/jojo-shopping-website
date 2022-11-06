@@ -1,6 +1,6 @@
-import { Toolbar, AppBar, styled } from "@mui/material";
 import LeftBar from "./LeftBar";
 import RightBar from "./RightBar";
+import { Toolbar, AppBar, styled } from "@mui/material";
 
 export default function NavigationBar() {
   const StyledToolbar = styled(Toolbar)({

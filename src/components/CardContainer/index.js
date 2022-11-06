@@ -1,7 +1,7 @@
-import { useEffect, useState, useContext } from "react";
 import ProductCard from "./ProductCard";
+import { CartContext } from "../../context/CartContext";
+import { useEffect, useState, useContext } from "react";
 import { Grid, Typography, Stack, Box } from "@mui/material";
-import { CartContext } from "../../App";
 
 export default function CardContainer() {
   const [products, setProducts] = useState(null);
@@ -43,14 +43,6 @@ export default function CardContainer() {
     });
     return productsList;
   }
-  console.log(
-    "REACT_APP_FIREBASE_APIKEY: ",
-    process.env.REACT_APP_FIREBASE_APIKEY
-  );
-  console.log(
-    "REACT_APP_FIREBASE_AUTHDOMAIN: ",
-    process.env.REACT_APP_FIREBASE_AUTHDOMAIN
-  );
 
   return (
     <Stack spacing={0} px={3}>

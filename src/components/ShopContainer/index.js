@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { CartContext } from "../../App";
+import { CartContext } from "../../context/CartContext";
 import ProductCard from "../CardContainer/ProductCard";
 import {
   Grid,
