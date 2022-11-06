@@ -12,7 +12,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 
 export default function RightBar() {
-  const { cart } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
   const { currentUser } = useContext(AuthContext);
 
   const RightBar = styled(Box)({
@@ -26,6 +26,11 @@ export default function RightBar() {
       .then(() => {
         // console.log("sign OUT success");
         // Sign-out successful.
+        setCart({
+          items: [],
+          totalQuantity: 0,
+          totalPrice: 0,
+        });
       })
       .catch((error) => {
         // console.log("sign OUT error: ", error.message);

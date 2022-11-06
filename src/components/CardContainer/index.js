@@ -10,7 +10,7 @@ export default function CardContainer() {
   // console.log("before use effect", cart);
   useEffect(() => {
     const fetchData = function () {
-      fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=12")
+      fetch(`${process.env.REACT_APP_FAKESTORE_API}/products?offset=0&limit=12`)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`API response with Status: ${response.status}`);
@@ -43,6 +43,14 @@ export default function CardContainer() {
     });
     return productsList;
   }
+  console.log(
+    "REACT_APP_FIREBASE_APIKEY: ",
+    process.env.REACT_APP_FIREBASE_APIKEY
+  );
+  console.log(
+    "REACT_APP_FIREBASE_AUTHDOMAIN: ",
+    process.env.REACT_APP_FIREBASE_AUTHDOMAIN
+  );
 
   return (
     <Stack spacing={0} px={3}>

@@ -19,7 +19,7 @@ export default function ShopContainer() {
     Electronics: "Electronics",
     Furnitures: "Furnitures",
     Shoes: "Shoes",
-    Other: "Other",
+    Others: "Others",
   };
   const SORTBY = {
     TitleAtoZ: "Title, A to Z",
@@ -40,7 +40,7 @@ export default function ShopContainer() {
   useEffect(() => {
     const fetchData = function () {
       fetch(
-        `https://api.escuelajs.co/api/v1${category.api}/products?offset=0&limit=12`
+        `${process.env.REACT_APP_FAKESTORE_API}${category.api}/products?offset=0&limit=12`
       )
         .then((response) => {
           if (!response.ok) {
@@ -109,7 +109,7 @@ export default function ShopContainer() {
           title: selectedItem,
         });
         return;
-      case CATEGORIES.Other:
+      case CATEGORIES.Others:
         setCategory({
           selection: selectedItem,
           api: `/categories/5`,
@@ -120,7 +120,7 @@ export default function ShopContainer() {
         setCategory({
           selection: selectedItem,
           api: ``,
-          title: selectedItem,
+          title: `${selectedItem} Products`,
         });
         return;
       default:
