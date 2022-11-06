@@ -4,6 +4,8 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount";
+import Shop from "./pages/Shop";
+import Test1 from "./Dummy/Test1";
 
 export const CartContext = createContext();
 // router ref: https://www.w3schools.com/react/react_router.asp
@@ -22,6 +24,8 @@ function App() {
             <Route path="cart" element={<Cart />} />
             <Route path="login" element={<Login />} />
             <Route path="createAccount" element={<CreateAccount />} />
+            <Route path="shop" element={<Shop />} />
+            <Route path="test" element={<Test1 />} />
           </Route>
         </Routes>
       </CartContext.Provider>

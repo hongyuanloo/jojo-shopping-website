@@ -67,7 +67,8 @@ export default function ProductCard({ product, cart, setCart }) {
           component="img"
           alt="green iguana"
           // height="300"
-          image={images[0]}
+          // temporary use categor image, if there is no images provided
+          image={images[0] === "" ? category.image : images[0]}
           sx={{ borderRadius: "4px" }}
         />
 

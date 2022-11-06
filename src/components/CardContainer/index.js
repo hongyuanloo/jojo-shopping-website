@@ -1,32 +1,36 @@
 import { useEffect, useState, useContext } from "react";
 import ProductCard from "./ProductCard";
-import { Grid, Typography, Stack } from "@mui/material";
+import { Grid, Typography, Stack, Box } from "@mui/material";
 import { CartContext } from "../../App";
 
 export default function CardContainer() {
   const [products, setProducts] = useState(null);
   const { cart, setCart } = useContext(CartContext);
 
-  console.log(cart);
+  // console.log("before use effect", cart);
   useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=12")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`API response with Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setProducts(data);
-        // console.log("data-length: ", data.length);
-        // console.log("data: ", data[2]);
-      })
-      .catch((error) => {
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        );
-      });
+    const fetchData = function () {
+      fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=12")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`API response with Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setProducts(data);
+          // console.log("data-length: ", data.length);
+          // console.log("data: ", data[2]);
+          // console.log("data fetch ok.", data);
+        })
+        .catch((error) => {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+        });
+    };
+    fetchData();
   }, []);
 
   function display() {
@@ -41,14 +45,15 @@ export default function CardContainer() {
   }
 
   return (
-    <Stack spacing={0} alignItems="center">
-      <Typography variant="h6" color="text.secondary" pt={2}>
-        Featured Products
-      </Typography>
-      {/* <div>{cartItems.length === 0 ? "nothing" : displayCartItems()}</div> */}
-      <Grid container p={3}>
-        {products === null ? "" : display()}
-      </Grid>
+    <Stack spacing={0} px={3}>
+      <Box sx={{ textAlign: "center" }} pt={2}>
+        <Typography variant="h6" color="text.secondary">
+          Featured Products
+        </Typography>
+      </Box>
+      <Box sx={{ flexGrow: 1 }} py={1}>
+        <Grid container>{products && display()}</Grid>
+      </Box>
     </Stack>
   );
 }

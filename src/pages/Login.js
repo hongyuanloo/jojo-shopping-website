@@ -3,7 +3,14 @@ import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { TextField, Button, Typography, Stack, styled } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Typography,
+  Stack,
+  Box,
+  styled,
+} from "@mui/material";
 
 export default function Login() {
   const [input, setInput] = useState({ email: "", password: "" });
@@ -46,10 +53,13 @@ export default function Login() {
   };
 
   return (
-    <Stack textAlign="center" justifyContent="center">
-      <Typography variant="h6" color="text.secondary" pt={3}>
-        Login
-      </Typography>
+    <Stack justifyContent="center">
+      <Box sx={{ textAlign: "center" }} pt={3}>
+        <Typography variant="h6" color="text.secondary">
+          Login
+        </Typography>
+      </Box>
+
       <Stack justifyContent="center" alignItems="center">
         <form onSubmit={handleSubmit}>
           <Stack spacing={2} p={3} sx={{ width: 250 }}>
@@ -92,6 +102,7 @@ export default function Login() {
             )}
           </Stack>
         </form>
+
         <Stack spacing={2}>
           <StyledTypography>
             Don't have an account?

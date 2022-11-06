@@ -30,8 +30,13 @@ export default function LeftBar() {
         sx={{ display: { xs: "none", md: "flex" } }}
       >
         <StyleTypography>Home</StyleTypography>
-        <StyleTypography>Shop</StyleTypography>
+        <Link to="/shop" style={{ textDecoration: "none" }}>
+          <StyleTypography>Shop</StyleTypography>
+        </Link>
         <StyleTypography>About Us</StyleTypography>
+        <Link to="/test" style={{ textDecoration: "none" }}>
+          <StyleTypography>Test</StyleTypography>
+        </Link>
       </Stack>
       <Stack
         direction="row"

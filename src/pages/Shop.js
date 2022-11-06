@@ -1,12 +1,12 @@
-import CardContainer from "../components/CardContainer";
+import ShopContainer from "../components/ShopContainer";
 import { Box } from "@mui/material";
 import NavigationBar from "../components/NavigationBar";
 
-export default function Products() {
+export default function Shop() {
   return (
     <Box>
       <NavigationBar />
-      <CardContainer />
+      <ShopContainer />
     </Box>
   );
 }
