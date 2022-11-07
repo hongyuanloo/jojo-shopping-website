@@ -4,14 +4,14 @@ export const AutoSliderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "40px 0px 40px 0px",
+  padding: "30px 0px",
   overflow: "hidden",
   background: "lightblue",
   [theme.breakpoints.down("md")]: {
-    padding: "20px 0px 20px 0px",
+    padding: "25px 0px",
   },
   [theme.breakpoints.down("sm")]: {
-    padding: "10px 0px 10px 0px",
+    padding: "20px 0px",
   },
 }));
 

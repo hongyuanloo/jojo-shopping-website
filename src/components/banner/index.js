@@ -13,7 +13,7 @@ export default function Banner() {
       <BannerImage src="https://img.freepik.com/free-photo/girl-holds-fashion-shopping-bag-beauty_1150-13673.jpg"></BannerImage>
       <BannerContent>
         <Typography variant="h6">Huge Collection</Typography>
-        <BannerTitle varaint="h2">New Bags</BannerTitle>
+        <BannerTitle variant="h2">New Bags</BannerTitle>
         <BannerDescription variant="subtitle1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.

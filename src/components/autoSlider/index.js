@@ -5,7 +5,7 @@ import { AutoSliderContainer, MessageText } from "../../styles/autoSlider";
 const messages = [
   "10% off on your first order!",
   "Singapore sale starts now, visit any store.",
-  "Please like and subscribe",
+  "Additonal 20% off on second items!",
 ];
 
 export default function AutoSlider() {
@@ -38,7 +38,7 @@ export default function AutoSlider() {
         in={show}
         timeout={{ enter: 500, exit: 100 }}
       >
-        <Box display="flex" justifyCenter="center" alignItem="center">
+        <Box display="flex" justifyContent="center" alignItems="center">
           <MessageText>{messages[messageIndex]}</MessageText>
         </Box>
       </Slide>
