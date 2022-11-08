@@ -1,46 +1,31 @@
 import { Link } from "react-router-dom";
 import { auth } from "../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {
-  TextField,
-  Button,
-  Typography,
-  Stack,
-  Box,
-  styled,
-} from "@mui/material";
+import { Colors } from "../styles/theme";
+import { FooterText } from "../styles/login";
+import { TextField, Button, Typography, Stack, Box } from "@mui/material";
 
-export default function Login() {
+export default function CreateAccount() {
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState({ status: false, code: "", message: "" });
 
   const navigate = useNavigate();
-
-  const StyledTypography = styled(Typography)(({ theme }) => ({
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-    fontSize: theme.typography.caption.fontSize,
-  }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const email = input.email;
     const password = input.password;
-    // console.log("LoginNEW", email, password);
 
     try {
-      //   const userCredentials =
-      await signInWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password); //   const userCredential =
       setError({ status: false, code: "", message: "" });
-      //   console.log("log in success");
-      //   console.log("Login", userCredentials.user.email);
+      //   console.log("createAccount", userCredential.user);
       navigate("/");
     } catch (err) {
-      //   console.log("Login error Code: ", err.code);
-      //   console.log("Login error message: ", err.message);
+      // login fails
       setError({ status: true, code: err.code, message: err.message });
     }
   };
@@ -53,10 +38,10 @@ export default function Login() {
   };
 
   return (
-    <Stack justifyContent="center">
-      <Box sx={{ textAlign: "center" }} pt={3}>
-        <Typography variant="h6" color="text.secondary">
-          Login
+    <Stack textAlign="center" justifyContent="center">
+      <Box sx={{ textAlign: "center" }} pt={4}>
+        <Typography variant="h6" color={Colors.text}>
+          Create Account
         </Typography>
       </Box>
 
@@ -91,27 +76,28 @@ export default function Login() {
                 handleChange(e);
               }}
             />
+            <FooterText sx={{ textAlign: "left", fontSize: 10 }}>
+              By signing up, I agree to the XXX's Terms of Service, Privacy
+              Policy and Refund Policy.
+            </FooterText>
             <Button variant="contained" type="submit" size="small">
-              Login
+              CREATE
             </Button>
 
             {error.status && (
-              <StyledTypography sx={{ color: "red" }}>
-                {error.code}
-              </StyledTypography>
+              <FooterText sx={{ color: "red" }}>{error.code}</FooterText>
             )}
           </Stack>
         </form>
 
-        <Stack spacing={2}>
-          <StyledTypography>
-            Don't have an account?
-            <Link to="/createAccount">Create an account</Link>
-          </StyledTypography>
+        <Stack spacing={2} sx={{ width: 250 }}>
+          <FooterText>
+            {`Already have an account? `} <Link to="/login">Login</Link>
+          </FooterText>
 
-          <StyledTypography sx={{ textAlign: "left" }}>
+          <FooterText sx={{ textAlign: "left" }}>
             <Link to="/">Return to store </Link>
-          </StyledTypography>
+          </FooterText>
         </Stack>
       </Stack>
     </Stack>

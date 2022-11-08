@@ -1,6 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import { CartContext } from "../../context/CartContext";
-import ProductCard from "../CardContainer/ProductCard";
+import ProductCard from "../featuredProducts/ProductCard";
+import { Colors } from "../../styles/theme";
+import { CATEGORIES, SORTBY } from "./constants";
 import {
   Grid,
   Select,
@@ -13,29 +15,14 @@ import {
 } from "@mui/material";
 
 export default function ShopContainer() {
-  const CATEGORIES = {
-    All: "All",
-    Clothes: "Clothes",
-    Electronics: "Electronics",
-    Furnitures: "Furnitures",
-    Shoes: "Shoes",
-    Others: "Others",
-  };
-  const SORTBY = {
-    TitleAtoZ: "Title, A to Z",
-    TitleZtoA: "Title, Z to A",
-    PriceLowtoHigh: "Price, low to high",
-    PriceHightoLow: "Price, high to low",
-  };
+  const [productsData, setProductsData] = useState(null);
+  const { cart, setCart } = useContext(CartContext);
   const [category, setCategory] = useState({
     selection: "All",
     api: "",
     title: "All Products",
   });
   const [sortBySelection, setSortBySelection] = useState(SORTBY.TitleAtoZ);
-  const [products, setProducts] = useState(null);
-
-  const { cart, setCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchData = function () {
@@ -63,10 +50,7 @@ export default function ShopContainer() {
             return 0;
           });
 
-          setProducts(sortedData);
-          // console.log("data-length: ", data.length);
-          // console.log("data: ", data[2]);
-          //   console.log("data fetch ok.", data);
+          setProductsData(sortedData);
         })
         .catch((error) => {
           console.error(
@@ -131,7 +115,7 @@ export default function ShopContainer() {
 
   function handleChangeSortBy(event) {
     const selectedItem = event.target.value;
-    let sortedData = products.slice();
+    const sortedData = productsData.slice();
 
     setSortBySelection(selectedItem);
 
@@ -149,7 +133,7 @@ export default function ShopContainer() {
           }
           return 0;
         });
-        setProducts(sortedData);
+        setProductsData(sortedData);
         return;
 
       case SORTBY.TitleZtoA:
@@ -164,40 +148,44 @@ export default function ShopContainer() {
           }
           return 0;
         });
-        setProducts(sortedData);
+        setProductsData(sortedData);
         return;
 
       case SORTBY.PriceLowtoHigh:
         sortedData.sort((a, b) => a.price - b.price);
-        setProducts(sortedData);
+        setProductsData(sortedData);
         return;
 
       case SORTBY.PriceHightoLow:
         sortedData.sort((a, b) => b.price - a.price);
-        setProducts(sortedData);
+        setProductsData(sortedData);
         return;
     }
   }
 
-  function MenuItemsCategoriesList() {
-    const categories = Object.keys(CATEGORIES);
-    return categories.map((category) => {
+  function displayCategoriesList() {
+    const categoriesList = Object.keys(CATEGORIES);
+    return categoriesList.map((category) => {
       return (
-        <MenuItem key={category} value={category} sx={{ fontSize: "0.8rem" }}>
+        <MenuItem
+          key={category}
+          value={category}
+          sx={{ fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" } }}
+        >
           {category}
         </MenuItem>
       );
     });
   }
 
-  function MenuItemsSortByList() {
+  function displaySortByList() {
     const sortByList = Object.keys(SORTBY);
     return sortByList.map((sortItem) => {
       return (
         <MenuItem
           key={SORTBY[sortItem]}
           value={SORTBY[sortItem]}
-          sx={{ fontSize: "0.8rem" }}
+          sx={{ fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" } }}
         >
           {SORTBY[sortItem]}
         </MenuItem>
@@ -205,31 +193,45 @@ export default function ShopContainer() {
     });
   }
 
-  function productsList() {
-    // console.log("products: ", products);
-    // console.log("products price: ", products[0].price); //number
-    const productsList = products.map((product) => {
+  function displayProducts() {
+    const productItems = productsData.map((product) => {
       return (
-        <Grid key={product.id} item xs={6} md={3} p={2}>
+        <Grid
+          key={product.id}
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          p={2}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <ProductCard product={product} cart={cart} setCart={setCart} />
         </Grid>
       );
     });
-    return productsList;
+    return productItems;
   }
 
   return (
-    <Stack spacing={0} px={3}>
-      <Box sx={{ textAlign: "center" }} pt={2}>
-        <Typography variant="h6" color="text.secondary">
+    <Stack spacing={0} px={3} pb={6}>
+      <Box sx={{ textAlign: "center" }} pt={5}>
+        <Typography variant="h5" color={Colors.text}>
           {category.title}
         </Typography>
       </Box>
 
-      <Stack spacing={0} px={0} direction="row">
+      <Stack spacing={0} py={3} direction="row">
         <Box sx={{ width: 140 }} px={2}>
           <FormControl fullWidth size="small">
-            <InputLabel id="category-select-label" sx={{ fontSize: "0.8rem" }}>
+            <InputLabel
+              id="category-select-label"
+              sx={{ fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" } }}
+            >
               Category Filter
             </InputLabel>
 
@@ -240,16 +242,19 @@ export default function ShopContainer() {
               label="Category Filter"
               onChange={handleChangeCategory}
               sx={{
-                fontSize: "0.8rem",
+                fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" },
               }}
             >
-              {MenuItemsCategoriesList()}
+              {displayCategoriesList()}
             </Select>
           </FormControl>
         </Box>
         <Box sx={{ width: 140 }} px={2}>
           <FormControl fullWidth size="small">
-            <InputLabel id="sortby-select-label" sx={{ fontSize: "0.8rem" }}>
+            <InputLabel
+              id="sortby-select-label"
+              sx={{ fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" } }}
+            >
               Sort by
             </InputLabel>
 
@@ -260,17 +265,17 @@ export default function ShopContainer() {
               label="Sort by"
               onChange={handleChangeSortBy}
               sx={{
-                fontSize: "0.8rem",
+                fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" },
               }}
             >
-              {MenuItemsSortByList()}
+              {displaySortByList()}
             </Select>
           </FormControl>
         </Box>
       </Stack>
 
-      <Box sx={{ flexGrow: 1 }} py={1}>
-        <Grid container>{products && productsList()}</Grid>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container>{productsData && displayProducts()}</Grid>
       </Box>
     </Stack>
   );

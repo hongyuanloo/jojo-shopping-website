@@ -1,4 +1,4 @@
-import NavigationBar from "../components/NavigationBar";
+import NavigationBar from "../components/navigationBar";
 import { Box } from "@mui/material";
 
 import CardContainer from "../components/CartContainer";

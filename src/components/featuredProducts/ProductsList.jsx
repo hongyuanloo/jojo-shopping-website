@@ -1,13 +1,12 @@
 import ProductCard from "./ProductCard";
 import { CartContext } from "../../context/CartContext";
 import { useEffect, useState, useContext } from "react";
-import { Grid, Typography, Stack, Box } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 
-export default function CardContainer() {
-  const [products, setProducts] = useState(null);
+export default function ProductsList() {
+  const [productsData, setProductsData] = useState(null);
   const { cart, setCart } = useContext(CartContext);
 
-  // console.log("before use effect", cart);
   useEffect(() => {
     const fetchData = function () {
       fetch(`${process.env.REACT_APP_FAKESTORE_API}/products?offset=0&limit=12`)
@@ -18,10 +17,7 @@ export default function CardContainer() {
           return response.json();
         })
         .then((data) => {
-          setProducts(data);
-          // console.log("data-length: ", data.length);
-          // console.log("data: ", data[2]);
-          // console.log("data fetch ok.", data);
+          setProductsData(data);
         })
         .catch((error) => {
           console.error(
@@ -33,27 +29,33 @@ export default function CardContainer() {
     fetchData();
   }, []);
 
-  function display() {
-    const productsList = products.map((product) => {
+  function displayProducts() {
+    const productItems = productsData.map((product) => {
       return (
-        <Grid key={product.id} item xs={6} md={3} p={2}>
+        <Grid
+          key={product.id}
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          p={2}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <ProductCard product={product} cart={cart} setCart={setCart} />
         </Grid>
       );
     });
-    return productsList;
+    return productItems;
   }
 
   return (
-    <Stack spacing={0} px={3}>
-      <Box sx={{ textAlign: "center" }} pt={2}>
-        <Typography variant="h6" color="text.secondary">
-          Featured Products
-        </Typography>
-      </Box>
-      <Box sx={{ flexGrow: 1 }} py={1}>
-        <Grid container>{products && display()}</Grid>
-      </Box>
-    </Stack>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container>{productsData && displayProducts()}</Grid>
+    </Box>
   );
 }

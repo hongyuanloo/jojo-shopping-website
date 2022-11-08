@@ -55,7 +55,7 @@ export default function Footer() {
             </ListItemText>
             <ListItemText>
               <Typography lineHeight={2} variant="caption2">
-                Terms &amps; Conditions
+                Terms &amp; Conditions
               </Typography>
             </ListItemText>
           </List>

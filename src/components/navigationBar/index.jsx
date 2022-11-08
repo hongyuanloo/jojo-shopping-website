@@ -1,22 +1,18 @@
 import LeftBar from "./LeftBar";
 import RightBar from "./RightBar";
-import { Toolbar, AppBar, styled } from "@mui/material";
+import { NavToolbar } from "../../styles/navigationBar";
+import { AppBar } from "@mui/material";
 
 export default function NavigationBar() {
-  const StyledToolbar = styled(Toolbar)({
-    display: "flex",
-    justifyContent: "space-between",
-  });
-
   return (
     <AppBar
       position="sticky"
       sx={{ color: "primary.dark", backgroundColor: "#fff" }}
     >
-      <StyledToolbar>
+      <NavToolbar>
         <LeftBar />
         <RightBar />
-      </StyledToolbar>
+      </NavToolbar>
     </AppBar>
   );
 }

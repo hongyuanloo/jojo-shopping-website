@@ -1,25 +1,23 @@
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { AuthContext } from "../../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
-import { Box, styled, Button, Typography } from "@mui/material";
+import {
+  RightContainer,
+  NavReactLink,
+  NavText,
+} from "../../styles/navigationBar";
+import LoginIconButton from "./LoginIconButton";
+import { Button } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 
 export default function RightBar() {
   const { cart, setCart } = useContext(CartContext);
   const { currentUser } = useContext(AuthContext);
-
-  const RightBar = styled(Box)({
-    display: "flex",
-    gap: "20px",
-    alignItems: "center",
-  });
 
   const handleClick = () => {
     signOut(auth)
@@ -33,44 +31,38 @@ export default function RightBar() {
         });
       })
       .catch((error) => {
-        // console.log("sign OUT error: ", error.message);
-        // An error happened.
+        console.log("sign out error: ", error.message);
       });
   };
   const LogoutButton = () => {
     return (
       <Button onClick={handleClick}>
-        <Typography variant="subtitle2" color="text.secondary">
-          LOGOUT
-        </Typography>
+        <NavText>LOGOUT</NavText>
       </Button>
     );
   };
 
-  const LoginIcon = () => {
-    return (
-      <Link to="/login">
-        <IconButton aria-label="login">
-          <PersonIcon fontSize="medium" />
-        </IconButton>
-      </Link>
-    );
-  };
-
   return (
-    <RightBar>
+    <RightContainer>
       <IconButton aria-label="search">
-        <SearchIcon fontSize="medium" />
+        <SearchIcon
+          sx={{ fontSize: { xs: "1.4rem", sm: "1.4rem", md: "1.5rem" } }}
+        />
       </IconButton>
-      {!currentUser && <LoginIcon />}
-      <Link to="/cart">
+
+      {!currentUser && <LoginIconButton />}
+
+      <NavReactLink to="/cart">
         <IconButton aria-label="add cart">
           <Badge badgeContent={cart.totalQuantity} color="secondary">
-            <ShoppingCartIcon fontSize="medium" />
+            <ShoppingCartIcon
+              sx={{ fontSize: { xs: "1.4rem", sm: "1.4rem", md: "1.5rem" } }}
+            />
           </Badge>
         </IconButton>
-      </Link>
+      </NavReactLink>
+
       {currentUser && <LogoutButton />}
-    </RightBar>
+    </RightContainer>
   );
 }

@@ -1,24 +1,19 @@
+import { ProductText } from "../../styles/featuredProducts";
+import { Colors } from "../../styles/theme";
 import {
   Card,
-  styled,
   Box,
   Stack,
   CardContent,
   CardMedia,
-  Button,
-  Typography,
+  IconButton,
 } from "@mui/material";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 
 export default function ProductCard({ product, cart, setCart }) {
   const { title, price, images, category } = product;
 
-  const StyledTypography = styled(Typography)(({ theme }) => ({
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-    fontSize: theme.typography.caption.fontSize,
-  }));
-
-  const addCart = function () {
+  const handleClick = function () {
     const index = cart.items.findIndex((item) => {
       return item.title === title;
     });
@@ -52,22 +47,20 @@ export default function ProductCard({ product, cart, setCart }) {
   };
 
   return (
-    <Card sx={{ maxWidth: { xs: 400, md: 287 }, minWidth: { md: 190 } }} p={2}>
-      {/* <CardActionArea> */}
+    <Card sx={{ maxWidth: { xs: 450 } }}>
       <Box
         sx={{
-          // border: "2px solid purple",
           position: "relative",
           display: "flex",
-          alignItems: "center",
           flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <CardMedia
           component="img"
-          alt="green iguana"
-          // height="300"
-          // temporary use categor image, if there is no images provided
+          alt={`image of ${title}`}
+          // temporary use categorg image, if there is no images provided
           image={images[0] === "" ? category.image : images[0]}
           sx={{ borderRadius: "4px" }}
         />
@@ -75,28 +68,20 @@ export default function ProductCard({ product, cart, setCart }) {
         <Stack
           spacing={0}
           p={1}
-          sx={{ position: "absolute", bottom: "0", width: "80%" }}
+          sx={{ position: "absolute", top: "0", left: "0" }}
         >
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              opacity: 0.6,
-              ":hover": { opacity: 1.0 },
-            }}
-            onClick={addCart}
-          >
-            <StyledTypography>Add to Cart</StyledTypography>
-          </Button>
+          <IconButton aria-label="add to cart" onClick={handleClick}>
+            <AddCircleOutlinedIcon
+              sx={{ fontSize: "3rem", color: Colors.button }}
+            />
+          </IconButton>
         </Stack>
       </Box>
 
-      {/* sx={{ backgroundColor: "lightblue" }} */}
       <CardContent>
-        <StyledTypography> {title}</StyledTypography>
-        <StyledTypography> {`$ ${price}`}</StyledTypography>
+        <ProductText> {title}</ProductText>
+        <ProductText> {`$ ${price}`}</ProductText>
       </CardContent>
-      {/* </CardActionArea> */}
     </Card>
   );
 }
