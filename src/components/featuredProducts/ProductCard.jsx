@@ -1,4 +1,6 @@
 import { ProductText } from "../../styles/featuredProducts";
+import { CartContext } from "../../context/CartContext";
+import { useContext } from "react";
 import { Colors } from "../../styles/theme";
 import {
   Card,
@@ -10,8 +12,9 @@ import {
 } from "@mui/material";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 
-export default function ProductCard({ product, cart, setCart }) {
+export default function ProductCard({ product }) {
   const { title, price, images, category } = product;
+  const { cart, setCart } = useContext(CartContext);
 
   const handleClick = function () {
     const index = cart.items.findIndex((item) => {

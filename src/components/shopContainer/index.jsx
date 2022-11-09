@@ -1,28 +1,17 @@
-import { useEffect, useState, useContext } from "react";
-import { CartContext } from "../../context/CartContext";
+import { useEffect, useState } from "react";
 import ProductCard from "../featuredProducts/ProductCard";
 import { Colors } from "../../styles/theme";
-import { CATEGORIES, SORTBY } from "./constants";
-import {
-  Grid,
-  Select,
-  Typography,
-  Stack,
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-} from "@mui/material";
+import { Grid, Typography, Stack, Box } from "@mui/material";
+import CategoryFilter from "./CategoryFilter";
+import SortByFilter from "./SortByFilter";
 
 export default function ShopContainer() {
   const [productsData, setProductsData] = useState(null);
-  const { cart, setCart } = useContext(CartContext);
   const [category, setCategory] = useState({
     selection: "All",
     api: "",
     title: "All Products",
   });
-  const [sortBySelection, setSortBySelection] = useState(SORTBY.TitleAtoZ);
 
   useEffect(() => {
     const fetchData = function () {
@@ -62,137 +51,6 @@ export default function ShopContainer() {
     fetchData();
   }, [category]);
 
-  function handleChangeCategory(event) {
-    const selectedItem = event.target.value;
-    switch (selectedItem) {
-      case CATEGORIES.Clothes:
-        setCategory({
-          selection: selectedItem,
-          api: `/categories/1`,
-          title: selectedItem,
-        });
-        return;
-      case CATEGORIES.Electronics:
-        setCategory({
-          selection: selectedItem,
-          api: `/categories/2`,
-          title: selectedItem,
-        });
-        return;
-      case CATEGORIES.Furnitures:
-        setCategory({
-          selection: selectedItem,
-          api: `/categories/3`,
-          title: selectedItem,
-        });
-        return;
-      case CATEGORIES.Shoes:
-        setCategory({
-          selection: selectedItem,
-          api: `/categories/4`,
-          title: selectedItem,
-        });
-        return;
-      case CATEGORIES.Others:
-        setCategory({
-          selection: selectedItem,
-          api: `/categories/5`,
-          title: selectedItem,
-        });
-        return;
-      case CATEGORIES.All:
-        setCategory({
-          selection: selectedItem,
-          api: ``,
-          title: `${selectedItem} Products`,
-        });
-        return;
-      default:
-        setCategory({ selection: "All", api: "", title: "All Products" });
-        return;
-    }
-  }
-
-  function handleChangeSortBy(event) {
-    const selectedItem = event.target.value;
-    const sortedData = productsData.slice();
-
-    setSortBySelection(selectedItem);
-
-    switch (selectedItem) {
-      case SORTBY.TitleAtoZ:
-      default:
-        sortedData.sort((a, b) => {
-          const nameA = a.title.toUpperCase(); // ignore upper and lowercase
-          const nameB = b.title.toUpperCase(); // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-          return 0;
-        });
-        setProductsData(sortedData);
-        return;
-
-      case SORTBY.TitleZtoA:
-        sortedData.sort((a, b) => {
-          const nameA = a.title.toUpperCase(); // ignore upper and lowercase
-          const nameB = b.title.toUpperCase(); // ignore upper and lowercase
-          if (nameA > nameB) {
-            return -1;
-          }
-          if (nameA < nameB) {
-            return 1;
-          }
-          return 0;
-        });
-        setProductsData(sortedData);
-        return;
-
-      case SORTBY.PriceLowtoHigh:
-        sortedData.sort((a, b) => a.price - b.price);
-        setProductsData(sortedData);
-        return;
-
-      case SORTBY.PriceHightoLow:
-        sortedData.sort((a, b) => b.price - a.price);
-        setProductsData(sortedData);
-        return;
-    }
-  }
-
-  function displayCategoriesList() {
-    const categoriesList = Object.keys(CATEGORIES);
-    return categoriesList.map((category) => {
-      return (
-        <MenuItem
-          key={category}
-          value={category}
-          sx={{ fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" } }}
-        >
-          {category}
-        </MenuItem>
-      );
-    });
-  }
-
-  function displaySortByList() {
-    const sortByList = Object.keys(SORTBY);
-    return sortByList.map((sortItem) => {
-      return (
-        <MenuItem
-          key={SORTBY[sortItem]}
-          value={SORTBY[sortItem]}
-          sx={{ fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" } }}
-        >
-          {SORTBY[sortItem]}
-        </MenuItem>
-      );
-    });
-  }
-
   function displayProducts() {
     const productItems = productsData.map((product) => {
       return (
@@ -210,7 +68,7 @@ export default function ShopContainer() {
             alignItems: "center",
           }}
         >
-          <ProductCard product={product} cart={cart} setCart={setCart} />
+          <ProductCard product={product} />
         </Grid>
       );
     });
@@ -226,52 +84,11 @@ export default function ShopContainer() {
       </Box>
 
       <Stack spacing={0} py={3} direction="row">
-        <Box sx={{ width: 140 }} px={2}>
-          <FormControl fullWidth size="small">
-            <InputLabel
-              id="category-select-label"
-              sx={{ fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" } }}
-            >
-              Category Filter
-            </InputLabel>
-
-            <Select
-              labelId="category-select-label"
-              id="category-select"
-              value={category.selection}
-              label="Category Filter"
-              onChange={handleChangeCategory}
-              sx={{
-                fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" },
-              }}
-            >
-              {displayCategoriesList()}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box sx={{ width: 140 }} px={2}>
-          <FormControl fullWidth size="small">
-            <InputLabel
-              id="sortby-select-label"
-              sx={{ fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" } }}
-            >
-              Sort by
-            </InputLabel>
-
-            <Select
-              labelId="sortby-select-label"
-              id="sortby-select"
-              value={sortBySelection}
-              label="Sort by"
-              onChange={handleChangeSortBy}
-              sx={{
-                fontSize: { md: "1rem", sm: "0.9rem", xs: "0.8rem" },
-              }}
-            >
-              {displaySortByList()}
-            </Select>
-          </FormControl>
-        </Box>
+        <CategoryFilter category={category} setCategory={setCategory} />
+        <SortByFilter
+          productsData={productsData}
+          setProductsData={setProductsData}
+        />
       </Stack>
 
       <Box sx={{ flexGrow: 1 }}>

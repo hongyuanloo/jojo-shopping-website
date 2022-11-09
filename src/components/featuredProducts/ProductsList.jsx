@@ -1,11 +1,9 @@
 import ProductCard from "./ProductCard";
-import { CartContext } from "../../context/CartContext";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Grid, Box } from "@mui/material";
 
 export default function ProductsList() {
   const [productsData, setProductsData] = useState(null);
-  const { cart, setCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchData = function () {
@@ -46,7 +44,7 @@ export default function ProductsList() {
             alignItems: "center",
           }}
         >
-          <ProductCard product={product} cart={cart} setCart={setCart} />
+          <ProductCard product={product} />
         </Grid>
       );
     });
