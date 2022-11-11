@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { ProductsContext } from "../../context/ProductsContext";
 import ProductCard from "../featuredProducts/ProductCard";
 import { Colors } from "../../styles/theme";
 import { Grid, Typography, Stack, Box } from "@mui/material";
@@ -6,7 +7,9 @@ import CategoryFilter from "./CategoryFilter";
 import SortByFilter from "./SortByFilter";
 
 export default function ShopContainer() {
-  const [productsData, setProductsData] = useState(null);
+  // const [productsData, setProductsData] = useState(null);
+  const { productsData, setProductsData, fetchData } =
+    useContext(ProductsContext);
   const [category, setCategory] = useState({
     selection: "All",
     api: "",
@@ -49,7 +52,7 @@ export default function ShopContainer() {
         });
     };
     fetchData();
-  }, [category]);
+  }, [category, fetchData]);
 
   function displayProducts() {
     const productItems = productsData.map((product) => {

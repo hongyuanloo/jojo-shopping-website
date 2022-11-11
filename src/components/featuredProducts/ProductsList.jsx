@@ -1,9 +1,12 @@
 import ProductCard from "./ProductCard";
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
+import { ProductsContext } from "../../context/ProductsContext";
 import { Grid, Box } from "@mui/material";
 
 export default function ProductsList() {
-  const [productsData, setProductsData] = useState(null);
+  const { productsData, setProductsData, fetchData } =
+    useContext(ProductsContext);
+  // const [productsData, setProductsData] = useState(null);
 
   useEffect(() => {
     const fetchData = function () {
@@ -25,7 +28,7 @@ export default function ProductsList() {
         });
     };
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   function displayProducts() {
     const productItems = productsData.map((product) => {

@@ -6,6 +6,7 @@ import CreateAccount from "./pages/CreateAccount";
 import Shop from "./pages/Shop";
 import Home from "./pages/Home";
 import { CartContextProvider } from "./context/CartContext";
+import { ProductsContextProvider } from "./context/ProductsContext";
 
 // import Test1 from "./Dummy/Test1";
 
@@ -13,20 +14,22 @@ import { CartContextProvider } from "./context/CartContext";
 function App() {
   return (
     <Router>
-      <CartContextProvider>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            {/* <Route index element={<Products />} /> */}
-            <Route path="home" element={<Home />} />
-            <Route path="shop" element={<Shop />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="login" element={<Login />} />
-            <Route path="createAccount" element={<CreateAccount />} />
-            {/* <Route path="test" element={<Test1 />} /> */}
-          </Route>
-        </Routes>
-      </CartContextProvider>
+      <ProductsContextProvider>
+        <CartContextProvider>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              {/* <Route index element={<Products />} /> */}
+              <Route path="home" element={<Home />} />
+              <Route path="shop" element={<Shop />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="login" element={<Login />} />
+              <Route path="createAccount" element={<CreateAccount />} />
+              {/* <Route path="test" element={<Test1 />} /> */}
+            </Route>
+          </Routes>
+        </CartContextProvider>
+      </ProductsContextProvider>
     </Router>
   );
 }

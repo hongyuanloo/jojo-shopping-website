@@ -11,9 +11,9 @@ import {
 import LoginIconButton from "./LoginIconButton";
 import { Button } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
+import SearchContainer from "./Search";
 
 export default function RightBar() {
   const { cart, setCart } = useContext(CartContext);
@@ -44,11 +44,12 @@ export default function RightBar() {
 
   return (
     <RightContainer>
-      <IconButton aria-label="search">
+      <SearchContainer />
+      {/* <IconButton aria-label="search">
         <SearchIcon
           sx={{ fontSize: { xs: "1.4rem", sm: "1.4rem", md: "1.5rem" } }}
         />
-      </IconButton>
+      </IconButton> */}
 
       {!currentUser && <LoginIconButton />}
 

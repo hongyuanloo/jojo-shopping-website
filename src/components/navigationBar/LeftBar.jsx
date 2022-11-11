@@ -11,7 +11,7 @@ export default function LeftBar() {
   return (
     <LeftContainer>
       <NavReactLink to="/">
-        <Stack direction="row" alignItems="center" gap="10px" px={0} py={4}>
+        <Stack direction="row" alignItems="center" gap="5px" px={0} py={4}>
           <EmojiEmotionsIcon
             color="primary"
             sx={{ fontSize: { xs: "1.8rem", sm: "1.8rem", md: "2rem" } }}
@@ -30,7 +30,7 @@ export default function LeftBar() {
         <NavReactLink to="/shop">
           <NavText>Shop</NavText>
         </NavReactLink>
-        <NavText>About Us</NavText>
+        {/* <NavText>About Us</NavText> */}
       </Stack>
     </LeftContainer>
   );
