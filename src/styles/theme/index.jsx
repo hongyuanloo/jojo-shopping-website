@@ -12,10 +12,15 @@ export const Colors = {
   ///////////////
   //Button Color
   ///////////////
-  button: {
+  cartButton: {
     color: "rgba(0,0,0)",
     opacity: "0.2",
     ":hover": { opacity: 0.4 },
+  },
+  standardButton: {
+    backgroundColor: "rgba(0,0,0,0.5)",
+    color: "white",
+    hover: { backgroundColor: "rgba(0,0,0,0.4)" },
   },
   ///////////////
   // Solid Color

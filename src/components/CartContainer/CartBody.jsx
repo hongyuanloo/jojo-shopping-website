@@ -3,7 +3,8 @@ import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 import CartSubTotal from "./CartSubTotal";
-import { List, Divider, Button, Box } from "@mui/material";
+import { CartButtons } from "../../styles/cartContainer";
+import { List, Divider, Box } from "@mui/material";
 
 export default function CartBody() {
   const { cart, setCart } = useContext(CartContext);
@@ -25,11 +26,9 @@ export default function CartBody() {
   function ContinueShopping() {
     return (
       <Box textAlign="center" p={2}>
-        <Button variant="contained" size="small">
-          <Link to="/" style={{ textDecoration: "none" }}>
-            CONTINUE SHOPPING
-          </Link>
-        </Button>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <CartButtons>CONTINUE SHOPPING</CartButtons>
+        </Link>
       </Box>
     );
   }
@@ -47,6 +46,13 @@ export default function CartBody() {
           <CartSubTotal totalPrice={cart.totalPrice} />
         )}
       </List>
+      {cart.totalQuantity === 0 ? (
+        ""
+      ) : (
+        <Box textAlign="right" px={4}>
+          <CartButtons>CHECKOUT</CartButtons>
+        </Box>
+      )}
     </Box>
   );
 }

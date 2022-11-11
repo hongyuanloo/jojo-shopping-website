@@ -75,7 +75,7 @@ export default function ProductCard({ product }) {
         >
           <IconButton aria-label="add to cart" onClick={handleClick}>
             <AddCircleOutlinedIcon
-              sx={{ fontSize: "3rem", color: Colors.button }}
+              sx={{ fontSize: "3rem", color: Colors.cartButton }}
             />
           </IconButton>
         </Stack>
