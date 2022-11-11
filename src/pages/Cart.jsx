@@ -1,12 +1,13 @@
-import FeaturedProducts from "../components/featuredProducts";
 import NavigationBar from "../components/navigationBar";
 import { Box } from "@mui/material";
 
-export default function Products() {
+import CardContainer from "../components/CartContainer";
+
+export default function Cart() {
   return (
     <Box>
       <NavigationBar />
-      <FeaturedProducts />
+      <CardContainer />
     </Box>
   );
 }

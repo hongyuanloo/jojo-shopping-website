@@ -7,7 +7,6 @@ import CategoryFilter from "./CategoryFilter";
 import SortByFilter from "./SortByFilter";
 
 export default function ShopContainer() {
-  // const [productsData, setProductsData] = useState(null);
   const { productsData, setProductsData, fetchData } =
     useContext(ProductsContext);
   const [category, setCategory] = useState({

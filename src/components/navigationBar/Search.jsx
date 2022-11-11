@@ -15,7 +15,6 @@ export default function SearchContainer() {
         return item.title.toLowerCase().includes(input);
       });
       setProductsData(result);
-      //   console.log("result: ", result);
     }
   };
 

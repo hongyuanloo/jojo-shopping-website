@@ -22,7 +22,6 @@ export default function RightBar() {
   const handleClick = () => {
     signOut(auth)
       .then(() => {
-        // console.log("sign OUT success");
         // Sign-out successful.
         setCart({
           items: [],
@@ -45,11 +44,6 @@ export default function RightBar() {
   return (
     <RightContainer>
       <SearchContainer />
-      {/* <IconButton aria-label="search">
-        <SearchIcon
-          sx={{ fontSize: { xs: "1.4rem", sm: "1.4rem", md: "1.5rem" } }}
-        />
-      </IconButton> */}
 
       {!currentUser && <LoginIconButton />}
 
