@@ -35,9 +35,10 @@ export const ListContainer = styled(List)({
   padding: 0,
 });
 
-export const GridItemContainer = styled(Grid)({
-  textAlign: { sm: "left", xs: "center" },
-});
+export const GridItemContainer = styled(Grid)(({ theme }) => ({
+  textAlign: "left",
+  [theme.breakpoints.down("sm")]: { textAlign: "center" },
+}));
 
 export const SubscribeButton = styled(Button)(() => ({
   textTransform: "uppercase",

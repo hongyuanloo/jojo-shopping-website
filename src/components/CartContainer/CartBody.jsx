@@ -25,7 +25,7 @@ export default function CartBody() {
 
   function ContinueShopping() {
     return (
-      <Box textAlign="center" p={2}>
+      <Box textAlign="center" p={2} pb={12}>
         <Link to="/" style={{ textDecoration: "none" }}>
           <CartButtons>CONTINUE SHOPPING</CartButtons>
         </Link>

@@ -52,6 +52,7 @@ export default function ShopContainer() {
         });
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, fetchData]);
 
   function displayProducts() {
