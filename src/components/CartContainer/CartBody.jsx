@@ -49,7 +49,7 @@ export default function CartBody() {
       {cart.totalQuantity === 0 ? (
         ""
       ) : (
-        <Box textAlign="right" px={4}>
+        <Box textAlign="right" px={4} pb={3}>
           <CartButtons>CHECKOUT</CartButtons>
         </Box>
       )}
