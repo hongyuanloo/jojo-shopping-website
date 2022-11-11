@@ -5,18 +5,18 @@ import {
   NavLogoText,
 } from "../../styles/navigationBar";
 import { Stack } from "@mui/material";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 
 export default function LeftBar() {
   return (
     <LeftContainer>
       <NavReactLink to="/">
-        <Stack direction="row" alignItems="center" gap="5px" px={3} py={4}>
-          <AcUnitIcon
+        <Stack direction="row" alignItems="center" gap="10px" px={0} py={4}>
+          <EmojiEmotionsIcon
             color="primary"
             sx={{ fontSize: { xs: "1.8rem", sm: "1.8rem", md: "2rem" } }}
           />
-          <NavLogoText variant="h6">LOGO</NavLogoText>
+          <NavLogoText variant="h6">Jojo</NavLogoText>
         </Stack>
       </NavReactLink>
       <Stack
@@ -31,16 +31,6 @@ export default function LeftBar() {
           <NavText>Shop</NavText>
         </NavReactLink>
         <NavText>About Us</NavText>
-        {/* <NavReactLink to="/test">
-          <NavText>Test</NavText>
-        </NavReactLink> */}
-      </Stack>
-      <Stack
-        direction="row"
-        spacing={4}
-        sx={{ display: { xs: "flex", sm: "none" } }}
-      >
-        <NavText>Intentional hidden...</NavText>
       </Stack>
     </LeftContainer>
   );

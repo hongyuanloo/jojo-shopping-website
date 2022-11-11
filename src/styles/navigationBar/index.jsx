@@ -5,6 +5,7 @@ import { Colors } from "../theme";
 export const NavToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
+  padding: "0 24px",
 });
 
 export const LeftContainer = styled(Box)({
