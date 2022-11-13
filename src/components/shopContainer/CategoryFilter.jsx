@@ -73,14 +73,14 @@ export default function CategoryFilter({ category, setCategory }) {
     <Box sx={{ width: 140 }} px={2}>
       <FormControl fullWidth size="small">
         <InputLabelContainer id="category-select-label">
-          Category Filter
+          Category
         </InputLabelContainer>
 
         <SelectContainer
           labelId="category-select-label"
           id="category-select"
           value={category.selection}
-          label="Category Filter"
+          label="Category"
           onChange={handleChangeCategory}
         >
           {displayCategoriesList()}

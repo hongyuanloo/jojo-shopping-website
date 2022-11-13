@@ -8,11 +8,12 @@ export const NavToolbar = styled(Toolbar)({
   padding: "0 24px",
 });
 
-export const LeftContainer = styled(Box)({
+export const LeftContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: "40px",
   alignItems: "center",
-});
+  [theme.breakpoints.down("sm")]: { gap: "20px" },
+}));
 
 export const NavText = styled(Typography)(({ theme }) => ({
   fontSize: "1rem",

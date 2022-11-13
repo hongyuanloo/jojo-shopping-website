@@ -16,15 +16,17 @@ export default function LeftBar() {
             color="primary"
             sx={{ fontSize: { xs: "1.8rem", sm: "1.8rem", md: "2rem" } }}
           />
-          <NavLogoText variant="h6">Jojo</NavLogoText>
+          <NavLogoText
+            variant="h6"
+            sx={{ display: { xs: "none", sm: "block" } }}
+          >
+            Jojo
+          </NavLogoText>
         </Stack>
       </NavReactLink>
-      <Stack
-        direction="row"
-        spacing={4}
-        sx={{ display: { xs: "none", sm: "flex" } }}
-      >
-        <NavReactLink to="/home">
+
+      <Stack direction="row" sx={{ gap: { xs: "0", sm: "40px" } }}>
+        <NavReactLink to="/home" sx={{ display: { xs: "none", sm: "flex" } }}>
           <NavText>Home</NavText>
         </NavReactLink>
         <NavReactLink to="/shop">
